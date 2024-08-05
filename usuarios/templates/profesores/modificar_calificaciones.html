@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Modificar Calificaciones</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Alumno</th>
+        <th>Materia</th>
+        <th>Calificación 1</th>
+        <th>Calificación 2</th>
+        <th>Calificación 3</th>
+        <th>Calificación Final</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for calificacion in calificaciones %}
+        <tr>
+          <td>{{ calificacion.alumno.perfil.primer_nombre }} {{ calificacion.alumno.perfil.primer_apellido }}</td>
+          <td>{{ calificacion.materia.materia }}</td>
+          <td>{{ calificacion.calificacion1 }}</td>
+          <td>{{ calificacion.calificacion2 }}</td>
+          <td>{{ calificacion.calificacion3 }}</td>
+          <td>{{ calificacion.calificacion_final }}</td>
+          <td>
+            <form method="post" action="{% url 'profesor:modificar_calificaciones_profesor' %}">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <input type="hidden" name="id" value="{{ calificacion.id }}">
+              <button type="submit">Guardar</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Asignar Grupo a Alumnos</h1> <p><a href="{% url 'usuarios:home_admin' %}">   volver</a></p>
+    <form method="post">
+      {% csrf_token %}
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Grupo</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for alumno in alumnos %}
+            <tr>
+              <td>{{ alumno.perfil.primer_nombre }} {{ alumno.perfil.primer_apellido }}</td>
+              <td>
+                <select name="grupo_{{ alumno.id }}">
+                  <option value="">Seleccionar</option>
+                  <option value="1a" {% if alumno.grupo == '1a' %}selected{% endif %}>1a</option>
+                  <option value="1b" {% if alumno.grupo == '1b' %}selected{% endif %}>1b</option>
+                  <option value="2a" {% if alumno.grupo == '2a' %}selected{% endif %}>2a</option>
+                  <option value="2b" {% if alumno.grupo == '2b' %}selected{% endif %}>2b</option>
+                  <option value="3a" {% if alumno.grupo == '3a' %}selected{% endif %}>3a</option>
+                  <option value="3b" {% if alumno.grupo == '3b' %}selected{% endif %}>3b</option>
+                </select>
+                <input type="hidden" name="alumno_id" value="{{ alumno.id }}">
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <button type="submit">Guardar Cambios</button>
+    </form>
+</body>
+</html>

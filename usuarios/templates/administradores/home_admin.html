@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h2>Home</h2> <p><a href="{% url 'usuarios:perfil' %}">Perfil</a></p>
+  <p>Bienbenido administrador, {{ user.username }}!</p>
+  <form method="post" action="{% url 'usuarios:logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+
+    <p><a href="{% url 'usuarios:user_list' %}">Catalogo de Usuarios</a></p>
+
+    <p><a href="{% url 'usuarios:registrar_usuario' %}">Registrar usuario</a></p>
+
+    <p><a href="{% url 'usuarios:asignar_grupo_alumno' %}">Profesor</a></p>
+
+    <p><a href="{% url 'usuarios:asignar_materia_grupo_profesor' %}">Alumno</a></p>
+
+</body>
+</html>

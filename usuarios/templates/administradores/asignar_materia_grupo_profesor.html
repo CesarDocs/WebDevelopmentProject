@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Asignar Materia y Grupo a Profesores</h1> <p><a href="{% url 'usuarios:home_admin' %}">   volver</a></p>
+  <form method="post">
+    {% csrf_token %}
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Materia</th>
+          <th>Grupo</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for maestro in maestros %}
+          <tr>
+            <td>{{ maestro.perfil.primer_nombre }} {{ maestro.perfil.primer_apellido }}</td>
+            <td>
+              <select name="materia_{{ maestro.id }}">
+                <option value="">Seleccionar</option>
+                <option value="matemáticas 1" {% if maestro.materia == 'matemáticas 1' %}selected{% endif %}>Matemáticas 1</option>
+                <option value="matemáticas 2" {% if maestro.materia == 'matemáticas 2' %}selected{% endif %}>Matemáticas 2</option>
+                <option value="matemáticas 3" {% if maestro.materia == 'matemáticas 3' %}selected{% endif %}>Matemáticas 3</option>
+                <option value="español 1" {% if maestro.materia == 'español 1' %}selected{% endif %}>Español 1</option>
+                <option value="español 2" {% if maestro.materia == 'español 2' %}selected{% endif %}>Español 2</option>
+                <option value="español 3" {% if maestro.materia == 'español 3' %}selected{% endif %}>Español 3</option>
+                <option value="ciencias 1" {% if maestro.materia == 'ciencias 1' %}selected{% endif %}>Ciencias 1</option>
+                <option value="ciencias 2" {% if maestro.materia == 'ciencias 2' %}selected{% endif %}>Ciencias 2</option>
+                <option value="ciencias 3" {% if maestro.materia == 'ciencias 3' %}selected{% endif %}>Ciencias 3</option>
+              </select>
+            </td>
+            <td>
+              <select name="grupo_{{ maestro.id }}">
+                <option value="">Seleccionar</option>
+                <option value="1a" {% if maestro.grupo == '1a' %}selected{% endif %}>1a</option>
+                <option value="1b" {% if maestro.grupo == '1b' %}selected{% endif %}>1b</option>
+                <option value="2a" {% if maestro.grupo == '2a' %}selected{% endif %}>2a</option>
+                <option value="2b" {% if maestro.grupo == '2b' %}selected{% endif %}>2b</option>
+                <option value="3a" {% if maestro.grupo == '3a' %}selected{% endif %}>3a</option>
+                <option value="3b" {% if maestro.grupo == '3b' %}selected{% endif %}>3b</option>
+              </select>
+            </td>
+            <input type="hidden" name="maestro_id" value="{{ maestro.id }}">
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <button type="submit">Guardar Cambios</button>
+  </form>
+</body>
+</html>

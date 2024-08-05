@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Perfil de {{ user.username }}</h1>  <a href="{% url 'usuarios:home' %}">volver</a></p>
+
+    <!-- Mostrar información del perfil -->
+    <h2>Información de Perfil</h2>
+    <p>Nombre: {{ user.perfil.primer_nombre }} {{ user.perfil.primer_apellido }}</p>
+    <p>Correo Electrónico: {{ user.email }}</p>
+    <p>Teléfono: {{ user.perfil.telefono }}</p>
+
+    <!-- Formulario para modificar la información de contacto -->
+    <h2>Modificar Información de Contacto</h2>
+    <form method="post" action="{% url 'usuarios:perfil' %}">
+        {% csrf_token %}
+        {{ contacto_form.as_p }}
+        <button type="submit" name="modificar_contacto">Actualizar Información de Contacto</button>
+    </form>
+
+    <!-- Formulario para cambiar la contraseña -->
+    <h2>Cambiar Contraseña</h2>
+    <form method="post" action="{% url 'usuarios:perfil' %}">
+        {% csrf_token %}
+        {{ contrasena_form.as_p }}
+        <button type="submit" name="cambiar_contrasena">Cambiar Contraseña</button>
+    </form>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

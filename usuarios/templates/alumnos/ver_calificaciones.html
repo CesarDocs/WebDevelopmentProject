@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Mis Calificaciones</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Materia</th>
+        <th>Calificación 1</th>
+        <th>Calificación 2</th>
+        <th>Calificación 3</th>
+        <th>Calificación Final</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for calificacion in calificaciones %}
+        <tr>
+          <td>{{ calificacion.materia.materia }}</td>
+          <td>{{ calificacion.calificacion1 }}</td>
+          <td>{{ calificacion.calificacion2 }}</td>
+          <td>{{ calificacion.calificacion3 }}</td>
+          <td>{{ calificacion.calificacion_final }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

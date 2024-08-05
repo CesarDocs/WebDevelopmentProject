@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User list</title>
+    <style>
+        table {
+            width: 80%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Catalogo de usuarios</h1>  <p><a href="{% url 'usuarios:home_admin' %}">   volver</a></p>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombres/th>
+                <th>Apellidos</th>
+                <th>Teléfono</th>
+                <th>Tipo de Usuario</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for perfil in perfiles %}
+            <tr>
+                <td>{{ perfil.primer_nombre }}   {{ perfil.segundo_nombre }}</td>
+                <td>{{ perfil.primer_apellido }}  {{ perfil.segundo_apellido }}</td>
+                <td>{{ perfil.telefono }}</td>
+                <td>{{ perfil.get_tipo_usuario_display }}</td>
+                <td>{{ perfil.fecha_nacimiento }}</td>
+                <td>
+                    <a href="{% url 'usuarios:modificar_usuario' perfil.user.id %}">Modificar</a>
+                    <a href="{% url 'usuarios:eliminar_usuario' perfil.user.id %}" onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?')">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

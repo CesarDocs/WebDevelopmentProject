@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Registro Exitoso</h2>
+    <p>Nombre de usuario: {{ username }}</p>
+    <p>Contraseña: {{ password }}</p>
+    <a href="{% url 'usuarios:registrar_usuario' %}">Regresar a la página de administración</a>
+</body>
+</html>
